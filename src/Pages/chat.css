@@ -1,0 +1,50 @@
+.chat-side {
+    background-color: brown;
+
+}
+
+.contacts-side {
+    background-color: chartreuse;
+}
+
+
+.user-details
+ {
+    height: 100%;
+    background-color: cyan;
+    width: 100%;
+}
+
+.chat-details {
+    height: 100%;
+    background-color: deeppink;
+    width: 100%;
+}
+
+.main-frame {
+    height: 90vh;
+    width: 90vw;
+    justify-content: center;
+    text-align: center;
+    align-items: flex;
+    position: absolute;
+    display: flex;
+    background-color: gold;
+}
+
+.Home-page {
+    background-color: burlywood;
+    height: 95%;
+    width: 75%;
+    position: absolute;
+    margin-left: 12.5%;
+    margin-top: 1%;
+    align-items: flex;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    border: 5px slategray;
+    border-style: solid;
+    border-radius: 20px;
+  }
+  

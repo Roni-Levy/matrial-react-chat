@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, CssBaseline, Grid, TextField, Typography, Link, Button, Container } from '@material-ui/core';
 import { VpnKey } from '@material-ui/icons';
+import registerRequest from '../API/login/registerRequest'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -111,7 +112,7 @@ const Register = () => {
                                 fullWidth
                                 variant='contained'
                                 color='primary'
-                                onClick={ () => {alert('created user: ' + JSON.stringify(user)) }}
+                                onClick={ () => { registerRequest(user.firstName, user.lastName, user.email, user.password) }}
                                 className={classes.submit}
                             >
                                 Register

@@ -8,6 +8,7 @@ import VpnKey from '@material-ui/icons/VpnKey';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import loginRequest from '../API/login/loginRequest'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -77,6 +78,7 @@ const Login = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={() => {loginRequest(user.email, user.password)}}
             >
                 Sing In
             </Button>

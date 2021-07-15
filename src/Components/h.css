@@ -4,7 +4,35 @@
     /* background-color: crimson; */
 }
 
-.br {
+.typing-box {
+    min-height: 80px;
+    max-height: 100px;
     width: 100%;
-    height: 15px;
+    background-color: #f0f0f0;
+}
+
+.icon-button {
+    height: 50px;
+    width: 50px;
+}
+
+.input-field {
+    background-color: #ffffff;
+    border-radius: 15px;
+}
+
+/* .margin-left {
+    margin-left: 0px;
+}
+
+.margin-right {
+    margin-right: 0px;
+} */
+
+.typing-box.margin-right {
+    float: right;
+}
+
+.typing-box.margin-left {
+    float: left;
 }

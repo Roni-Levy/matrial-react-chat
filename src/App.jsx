@@ -9,7 +9,6 @@ import {
 import Login from './Pages/Login';
 import ChatPage from './Pages/Chat';
 import Register from './Pages/Register';
-import BackgroundImage from './Images/background.jpeg'
 import './index.css';
 
 const App = () => {

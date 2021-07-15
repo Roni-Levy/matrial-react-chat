@@ -3,8 +3,22 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import StatusMessage from './StatusMessage';
 import Avatar from '@material-ui/core/Avatar';
-import ASD from './DJI_0180.jpg';
-import './h.css'
+
+import './h.css'  // // TODO: delete before marge to master
+
+
+// TODO: delete before marge to master
+//
+// expected props = {
+//     onClick: method // TODO: 
+//     contactName: String,
+//     contactImage: Image,
+//     lastMessage: {
+//         sendingTime: time as long,
+//         messageStatus: String,
+//         message: String,
+//     }
+// }
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 const Contact = (props) => {
     const classes = useStyles();
 
+    console.log(props);
+    var lastMessage  = props.lastMessage;
+    console.log(lastMessage);
     return (
         <Grid
             container
@@ -30,7 +47,7 @@ const Contact = (props) => {
             alignItems="center"
             className='contact-div'>
                 <Grid item xs={12} sm={2}>
-                    <Avatar alt='src' src={ASD} className={classes.large} />
+                    <Avatar alt='src' src={props.contactImage} className={classes.large} />
                 </Grid>
                 <Grid item container xs={12} sm={10}
                 direction="column"
@@ -42,13 +59,13 @@ const Contact = (props) => {
                     alignItems="flex-start">
                         <Grid item xs={12} sm={2}>
                             <small>
-                                16:57
+                                {getTime(1626213628598)}
                             </small>
                         </Grid>
                         <Grid item container justify="flex-end" xs={12} sm={10}>
                             <strong>
                                 <small>
-                                    Roni levy
+                                    {props.contactName}
                                 </small>
                             </strong>
                         </Grid>
@@ -58,11 +75,11 @@ const Contact = (props) => {
                     justify
                     alignItems>
                         <Grid item xs={12} sm={1}>
-                            <StatusMessage status='read' />    
+                            <StatusMessage status={lastMessage.messageStatus} />    
                         </Grid>
                         <Grid item xs={12} sm={11}>
                             <small>
-                                {getLastMessage(props.lastMessage)}
+                                {getLastMessage(lastMessage.message)}
                             </small>        
                         </Grid>
                     </Grid>
@@ -80,4 +97,15 @@ const getLastMessage = (lastMessage) => {
 
     return messageToReturn
 }
+
+const getTime = (timeAsLong) => {
+    // TODO: change format to work with moment.js after resolve the problem at npm installation
+
+    var date = new Date(timeAsLong);
+    var hours = '0' + date.getHours();
+    var minutes = '0' + date.getMinutes();
+
+    return hours.substring(hours.length - 2, hours.length) + ":" + minutes.substring(minutes.length - 2, minutes.length);
+}
+
 export default Contact;

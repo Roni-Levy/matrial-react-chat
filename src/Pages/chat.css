@@ -1,12 +1,6 @@
-.chat-side {
-    background-color: brown;
-
+.chat-list {
+    height: 85%;
 }
-
-.contacts-side {
-    background-color: chartreuse;
-}
-
 
 .user-details
  {
@@ -16,8 +10,8 @@
 }
 
 .chat-details {
-    height: 100%;
-    background-color: deeppink;
+    height: 70px;
+    background-color: #ededed;
     width: 100%;
 }
 
@@ -29,11 +23,11 @@
     align-items: flex;
     position: absolute;
     display: flex;
-    background-color: gold;
+    background-color: #ffffff;
 }
 
 .Home-page {
-    background-color: burlywood;
+    background-color: #ffffff;
     height: 95%;
     width: 75%;
     position: absolute;
@@ -47,4 +41,38 @@
     border-style: solid;
     border-radius: 20px;
   }
-  
+
+.contacts-list {
+    height: 88%;
+    width: 100%;
+    overflow: scroll;
+}
+
+.contacts-list::-webkit-scrollbar {
+    width: 5px
+}
+
+.contacts-list::-webkit-scrollbar-track {
+    -webkit-box-shaow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.contacts-list::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 15px;
+    outline: 1px solid slategray;
+}
+
+.header-right-size {
+    background-color: #ededed;
+}
+.right-side {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.left-side {
+    height: 100%; 
+    width: 100%;
+    background-color: gainsboro;
+}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
@@ -32,10 +33,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
     const classes = useStyles();
+    let history = useHistory();
+    
     const [ user, setUser ] = useState({
         email: '',
         password: ''
     });
+
+    useEffect(() => {
+      if(localStorage.getItem("Token") !== "") history.push("/chat")
+    })
 
     return (
         <Container component="main" maxWidth="xs">

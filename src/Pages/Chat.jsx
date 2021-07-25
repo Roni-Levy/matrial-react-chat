@@ -1,78 +1,36 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Contact from '../Components/Contact'
 import './chat.css';
 import SearchBox from '../Components/SearchBox';
 import TypingBox from '../Components/TypingBox';
 import DefaultUserImage from '../Components/DJI_0180.jpg';  // TODO: delete before marge to master
+import { useQuery } from 'react-query'
+import { fetchUser, fetchContacts } from '../API/chat/chatRequests'
+
+const useMultipleQuery = () => {
+    const user = useQuery('user', fetchUser);
+    const contacts = useQuery('contacts', fetchContacts);
+
+    return [user, contacts]
+}
 
 const ChatPage = () => {
-// TODO: delete before marge
-//
-// const expectedProps = {
-//     user: {
-//         userName: {
-//             firstName: String,
-//             lastName: String,
-//         },
-//         userAcount: {
-//             userEmail: String,
-//             userPassword: String,
-//         },
-//         userImage: Image,
-//     },
-//     contactList: [{
-//         chatId: UUID,
-//         contactName: String,
-//         contactImage: Image,
-//         lastMessage: {
-//             sendingTime: time as long,
-//             messageStatus: String,
-//             message: String,
-//         }
-//     }]
-// }
-//
-// const expectedChat = {
-//     chatId: UUID,
-//     contactName: String,
-//     contactImage: Image,
-//     messages: [{
-//         messageId: Number,
-//         sendingTime: Date,
-//         readMessageStatus: String,
-//         message: String,
-//         sender: String,
-//     }]
-// } 
+    const [ user, setUser ] = useState(useQuery('user', fetchUser).data)
+    const [ contacts, setContacts ] = useState(useQuery('contacts', fetchContacts).data);
+    // const [ chat, setChat ] = useState({});
 
-    const [c, setC] = useState({
-        user: {
-            email: '',
-            password: ''
-        },
-        chatsList: [{
-            userImage: '',
-            lastMessage: {
-                sendingTime: 0,
-                readMessageStatus: '',
-                message: ''
-            },
+    const [ inputFields, setInputFields ] = useState({
+        searchContact: '',
+        newMessage: ''
+    })
 
-        }],
-        chat: {
-            userImage: '',
-            massagesList: [ {
-                messageId: 0,
-                message: '',
-                sendingTime: 0,
-                readMessageStatus: '',
-            }],
-            isUserOnline: false,
-            isUserTyping: false
-            }
-    });
+    let history = useHistory();
+    
+    useEffect(() => {
+        if(localStorage.getItem("Token") === "") history.push("/")
+    })
 
     return(
         <Grid spacing={0} // frame
@@ -80,11 +38,9 @@ const ChatPage = () => {
         direction="row"
         justify="center"
         alignItems="center"
-        style={{height: "99vh", width: "99vw"}}>
-            
+        style={{height: "99vh", width: "99vw"}}>            
             <Grid
             container spacign={0}
-            container
             direction="row"
             justifyContent="center"
             alignItems="stretch"
@@ -109,7 +65,12 @@ const ChatPage = () => {
                 <Grid item xs={3}
                 style={{height: "100%"}}
                 >
-                    <RightSide />
+                    <RightSide
+                    searchContact={() => setInputFields({ ...inputFields, searchContact: "" })}
+                    userName={user.firstName + " " + user.lastName}
+                    userImage={DefaultUserImage}
+                    contactList={contacts}
+                    />
                 </Grid>
             </Grid>
         </Grid>
@@ -118,6 +79,7 @@ const ChatPage = () => {
 
 
 const RightSide = (props) => {
+
 // TODO: delete before marge to master
 //
 // expected props = {
@@ -125,6 +87,7 @@ const RightSide = (props) => {
 //     userName: String,
 //     userImage: Image,
 //     contactList: [{
+//       chatID: String
 //       contactName: String,
 //       contactImage: Image,
 //       lastMessage: {
@@ -134,43 +97,26 @@ const RightSide = (props) => {
 //     }]
 // }
 
-    const mockContactList = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,11,1,1,1,1,11,1,1,1,1,1,1,11,1,1,1,1,11,1,1,1,1,1,1,1,1,11,1,1,1,1,1,1,1,1,1];
-
     return(
         <div className="right-side">
             <div className="header-right-size">
                 
-                <SearchBox />
+                <SearchBox onChange={props.searchContact}/>
             </div>
             <div className="contacts-list">
             {
-                createContact()
+                // props.contactList.map((contact, index) => {
+                //     return <Contact 
+                //     onClick={() => { console.log("Please open chat id: " + contact.chatId) }} // TODO: 
+                //     contactName={contact.contactName}
+                //     contactImage={DefaultUserImage}
+                //     lastMessage={contact.lastMessage}
+                //     />
+                // })
             }
             </div>
         </div>
     );
-}
-
-// TODO: delete before marge to master
-const createContact = () => {
-    var props = {
-        contactName: 'Roni Levy',
-        contactImage: DefaultUserImage,
-        lastMessage: {
-            sendingTime: 1626213628598,
-            messageStatus: 'read',
-            message: 'Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah',
-        }
-    };
-
-    return <Contact 
-    contactName={props.contactName}
-    contactImage={props.contactImage}
-    lastMessage={{
-        sendingTime: 1626213628598,
-        messageStatus: 'read',
-        message: 'Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah',
-    }} />
 }
 
 export default ChatPage;    

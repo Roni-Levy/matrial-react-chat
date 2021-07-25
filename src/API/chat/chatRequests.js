@@ -1,23 +1,27 @@
 import axios from 'axios'
+import { BaseURL, config } from "../baseApi";
 
-export function getUserDetails() {
+export const fetchUser = async () => {
+    const res = await axios.get(`${BaseURL}/users`, config)
+    return res.data;
+}
 
-} 
+export const fetchContacts = async () => {
+    const res = await axios.get(`${BaseURL}/contacts`, config)
+    return res.data;
+}
 
-export function getContactProfile(contactEmail) {
 
-} 
+// TODO: For the future
+// export function getContactProfile(contactEmail) {
 
-export function getContacts() {
+// } 
 
-} 
+// export function getChat(chatId) {
 
-export function getChat(chatId) {
+// } 
 
-} 
+// export function sendNewMessage({ message }) {
 
-export function sendNewMessage({ message }) {
+// } 
 
-} 
-
-} 

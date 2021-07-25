@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, CssBaseline, Grid, TextField, Typography, Link, Button, Container } from '@material-ui/core';
 import { VpnKey } from '@material-ui/icons';
 import registerRequest from '../API/login/registerRequest'
+import Alert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,6 +35,18 @@ const Register = () => {
         password: ''
     });
 
+    const [ errorMessage, setErrorMessage ] = useState('');
+
+    let history = useHistory();
+
+    useEffect(() => {
+        if(localStorage.getItem("Token") !== "") history.push("/chat")
+    })
+
+    const handleSubmit = () => {
+        setErrorMessage(() => {return registerRequest(user.firstName, user.lastName, user.email, user.password)});
+    }
+
     return (
         <Container component='main' maxWidth='xs'>
             <CssBaseline />
@@ -44,13 +58,7 @@ const Register = () => {
                     Sing Up
                 </Typography>
                 <form className={classes.form} noValidate>
-                    
                     <Grid container spacing={2}>
-                        {/* <Grid iten sx={12}>
-                            <Avatar spacing={7}>
-                                +
-                            </Avatar>
-                        </Grid>                   */}
                         <Grid item xs={12} sm={6}>
                             <TextField 
                                 variant='outlined'
@@ -112,14 +120,15 @@ const Register = () => {
                                 fullWidth
                                 variant='contained'
                                 color='primary'
-                                onClick={ () => { registerRequest(user.firstName, user.lastName, user.email, user.password) }}
+                                onClick={ handleSubmit }
                                 className={classes.submit}
                             >
                                 Register
                             </Button>
                         </Grid>
+                        {errorMessage !== ''?<Alert severity="error">{errorMessage}</Alert>: <></>}
                         <Grid item justify='flex-end'>
-                            <Link href='/login' variant='body2' onClick={ () => {} }>
+                            <Link href='/login' variant='body2'>
                                 I already have an account
                             </Link>
                         </Grid>
@@ -131,3 +140,4 @@ const Register = () => {
 }
 
 export default Register;
+

@@ -3,7 +3,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-const SearchBox = () => {
+const SearchBox = (props) => {
     const useStyles = makeStyles((theme) => ({
         search: {
           position: 'relative',
@@ -55,6 +55,7 @@ const SearchBox = () => {
         <SearchIcon />
       </div>
       <InputBase
+        onChange={props.onChange}
         placeholder="Search…"
         classes={{
           root: classes.inputRoot,

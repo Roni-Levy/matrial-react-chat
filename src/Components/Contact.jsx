@@ -4,22 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import StatusMessage from './StatusMessage';
 import Avatar from '@material-ui/core/Avatar';
 
-import './h.css'  // // TODO: delete before marge to master
-
-
-// TODO: delete before marge to master
-//
-// expected props = {
-//     onClick: method // TODO: 
-//     contactName: String,
-//     contactImage: Image,
-//     lastMessage: {
-//         sendingTime: time as long,
-//         messageStatus: String,
-//         message: String,
-//     }
-// }
-
 const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -31,21 +15,28 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(7),
       height: theme.spacing(7),
     },
+    contact: {
+        width: '100%',
+        height: '70px',
+        borderTop: '1px solid #f2f2f2'
+    },
+    massage: {
+        textAlign: 'end'
+    }
   }));
-  
+
 const Contact = (props) => {
     const classes = useStyles();
-
-    console.log(props);
     var lastMessage  = props.lastMessage;
-    console.log(lastMessage);
+    
     return (
         <Grid
             container
             direction="row-reverse"
             justify="flex-start"
             alignItems="center"
-            className='contact-div'>
+            className={classes.contact}
+            onClick={props.onClick}>
                 <Grid item xs={12} sm={2}>
                     <Avatar alt='src' src={props.contactImage} className={classes.large} />
                 </Grid>
@@ -59,7 +50,7 @@ const Contact = (props) => {
                     alignItems="flex-start">
                         <Grid item xs={12} sm={2}>
                             <small>
-                                {getTime(1626213628598)}
+                                {getTime(lastMessage.sendingTime)}
                             </small>
                         </Grid>
                         <Grid item container justify="flex-end" xs={12} sm={10}>
@@ -75,9 +66,9 @@ const Contact = (props) => {
                     justify
                     alignItems>
                         <Grid item xs={12} sm={1}>
-                            <StatusMessage status={lastMessage.messageStatus} />    
+                            <StatusMessage status={lastMessage.readMessageStatus} />    
                         </Grid>
-                        <Grid item xs={12} sm={11}>
+                        <Grid item xs={12} sm={11} className={classes.massage}>
                             <small>
                                 {getLastMessage(lastMessage.message)}
                             </small>        

@@ -7,7 +7,7 @@ import {
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import Login from './Pages/Login';
-import ChatPage from './Pages/Chat';
+import ChatPage from './Pages/ChatPage';
 import Register from './Pages/Register';
 import './index.css';
 

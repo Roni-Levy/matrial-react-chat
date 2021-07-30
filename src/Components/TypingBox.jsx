@@ -1,64 +1,80 @@
 import React from 'react';
-// import { Grid } from '@material-ui/core';
-// import { fade, makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
-import './h.css'
+
+const useStyles = makeStyles((theme) => ({
+    gridContainer:{
+        display: 'flex',
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#e5e5e5',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+    button: {
+        height: '35px',
+        width: '35px',
+        alignItems: 'center',
+    },
+    inputDiv: {
+        height: '45px',
+        width: 'calc(100% - 200px)',
+        backgroundColor: 'white',
+        borderRadius: '50px',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: "center",
+    },
+    inputField: {
+        width: '100%',
+        height: '100%',
+        border: '0 solid white',
+        MozUserFocus: 'none',
+        focusHighlight: 'none',
+        focus: 'none',
+        outLine: 'none',
+        boxShadow: '0 0 0px #ffffff',
+    },
+    textarea: {
+        verticalAlign: 'middle',
+        width: 'calc(100% - 20px)',
+        height: '100%',
+        marginLeft: '5px',
+        marginRight: '5px',
+        border: 'none',
+        resize: 'none',
+        '&:focus': {
+            borderWidth: 'none',
+            outline: 'none !important',
+        }
+    },
+  }));
 
 const TypingBox = () => {
-    // const useStyles = makeStyles((theme) => ({
-    //     search: {
-    //       position: 'relative',
-    //       borderRadius: "50px",
-    //       backgroundColor: fade(theme.palette.common.black, 0.15),
-    //       '&:hover': {
-    //         backgroundColor: fade(theme.palette.common.white, 0.25),
-    //       },
-    //       marginLeft: 0,
-    //       width: '100%',
-    //       [theme.breakpoints.up('sm')]: {
-    //         marginLeft: theme.spacing(0),
-    //         width: '100%',
-    //       },
-    //     },
-    //     inputRoot: {
-    //       color: 'inherit',
-    //     },
-    //     inputInput: {
-    //       padding: theme.spacing(1, 1, 1, 0),
-    //       transition: theme.transitions.create('width'),
-    //       width: '100%',
-    //       [theme.breakpoints.up('sm')]: {
-    //         width: '100%',
-    //         '&:focus': {
-    //           width: '20ch',
-    //         },
-    //       },
-    //     },
-    //     inputField: {
-    //         borderRadius: theme.shape.borderRadius,
-    //     },
-    //   }));
-
-    // const classes = useStyles();    
+    const classes = useStyles();    
 
     return(
-        <div className="typing-box">
-            <span className="icon-button margin-left">
-                <SendOutlinedIcon fontSize="large" />
-            </span> 
-            <span className="input-field margin-right margin-left">   
-                <TextField id="outlined-basic" placeholder="Type your message here..." variant="outlined" />
-            </span>
-            <span className="icon-button margin-right">
-                <AttachFileOutlinedIcon fontSize="large" />
-            </span>
-            <span className="icon-button margin-right">
-                <EmojiEmotionsOutlinedIcon onClick={() => localStorage.setItem("Token", "")} fontSize="large" />
-            </span>
+      <div className={classes.gridContainer}>      
+        <div className={classes.button}>
+            <SendOutlinedIcon fontSize="large" />
         </div>
+        <div className={classes.inputDiv}>
+            <textarea className={classes.textarea}
+            rows='5'
+            placeholder="Type your message here..."
+            >
+            </textarea>
+        </div>
+        <div className={classes.button}>
+            <AttachFileOutlinedIcon fontSize="large" />
+        </div>
+        <div className={classes.button}>
+            <EmojiEmotionsOutlinedIcon onClick={() => localStorage.setItem("Token", "")} fontSize="large" />
+        </div>
+      </div>  
     );
 }
 

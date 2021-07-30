@@ -7,3 +7,7 @@ export const config = {
     }
 }
 
+export const useQueryConfig = {
+    staleTime: 5000,
+    onSuccess: () => console.log("Data Fetched")
+}

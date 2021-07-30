@@ -7,12 +7,12 @@ const SearchBox = (props) => {
     const useStyles = makeStyles((theme) => ({
         search: {
           position: 'relative',
-          borderRadius: theme.shape.borderRadius,
-          backgroundColor: fade(theme.palette.common.white, 0.15),
+          borderRadius: 30,
+          backgroundColor: fade(theme.palette.common.white, 1),
           '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
+            backgroundColor: fade(theme.palette.common.white, 0.8),
           },
-          marginLeft: 0,
+          marginRight: 0,
           width: '100%',
           [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(0),
@@ -30,6 +30,7 @@ const SearchBox = (props) => {
         },
         inputRoot: {
           color: 'inherit',
+          width: '100%'
         },
         inputInput: {
           padding: theme.spacing(1, 1, 1, 0),
